@@ -1,11 +1,8 @@
 package com.alibaba.ttl.threadpool.agent.usesjava8;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.alibaba.ttl.Utils;
 import org.junit.Assert;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,9 +25,6 @@ public class ForkJointAgentTest {
 
 
     static final AtomicLong tagCounter = new AtomicLong();
-
-    StringWriter stringWriter = new StringWriter();
-    PrintWriter printWriter = new PrintWriter(stringWriter);
 
     static {
         expandThreadPool(pool);
@@ -123,7 +117,7 @@ class SumTask extends RecursiveTask<Long> {
         String p = PARENT_MODIFIED_IN_CHILD + tag;
         ttlInstances.get(PARENT_MODIFIED_IN_CHILD).set(p);
 
-        ForkJointAgentTest.tag2copied.put(tag, Utils.copied(ttlInstances));
+        ForkJointAgentTest.tag2copied.put(tag, copied(ttlInstances));
 
         // ========================================================================
 

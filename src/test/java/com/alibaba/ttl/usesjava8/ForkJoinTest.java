@@ -1,13 +1,10 @@
 package com.alibaba.ttl.usesjava8;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
-import com.alibaba.ttl.Utils;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,9 +27,6 @@ public class ForkJoinTest {
 
 
     static final AtomicLong tagCounter = new AtomicLong();
-
-    StringWriter stringWriter = new StringWriter();
-    PrintWriter printWriter = new PrintWriter(stringWriter);
 
     static {
         expandThreadPool(pool);
@@ -128,7 +122,7 @@ class SumTask extends RecursiveTask<Long> {
                 String p = PARENT_MODIFIED_IN_CHILD + tag;
                 ttlInstances.get(PARENT_MODIFIED_IN_CHILD).set(p);
 
-                ForkJoinTest.tag2copied.put(tag, Utils.copied(ttlInstances));
+                ForkJoinTest.tag2copied.put(tag, copied(ttlInstances));
 
                 // ========================================================================
 
